@@ -1,0 +1,112 @@
+<svg viewBox="0 0 1000 840" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#4b5563"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1000" height="840" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="500" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#111827">Employee Management System — AWS EKS Architecture</text>
+
+  <!-- Internet / User -->
+  <rect x="420" y="60" width="160" height="42" rx="6" fill="#111827"/>
+  <text x="500" y="86" text-anchor="middle" font-size="14" fill="#ffffff">Internet User</text>
+
+  <line x1="500" y1="102" x2="500" y2="136" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Route 53 / ACM (future) -->
+  <rect x="360" y="138" width="280" height="40" rx="6" fill="#f3f4f6" stroke="#9ca3af" stroke-dasharray="4,3"/>
+  <text x="500" y="163" text-anchor="middle" font-size="12" fill="#6b7280">Route 53 + ACM/HTTPS (future improvement)</text>
+
+  <line x1="500" y1="178" x2="500" y2="206" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ALB -->
+  <rect x="380" y="208" width="240" height="44" rx="6" fill="#ff9900"/>
+  <text x="500" y="235" text-anchor="middle" font-size="14" font-weight="600" fill="#111827">AWS Application Load Balancer</text>
+
+  <line x1="500" y1="252" x2="500" y2="284" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ALB Controller note -->
+  <text x="500" y="272" text-anchor="middle" font-size="11" fill="#6b7280">provisioned by AWS Load Balancer Controller</text>
+
+  <!-- EKS Cluster boundary -->
+  <rect x="60" y="286" width="880" height="500" rx="10" fill="none" stroke="#2563eb" stroke-width="2" stroke-dasharray="6,4"/>
+  <text x="80" y="308" font-size="13" font-weight="700" fill="#2563eb">Amazon EKS Cluster</text>
+
+  <!-- Namespace boundary -->
+  <rect x="90" y="320" width="820" height="450" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <text x="108" y="342" font-size="12" font-weight="700" fill="#475569">Namespace: ems</text>
+
+  <!-- Ingress -->
+  <rect x="410" y="352" width="180" height="40" rx="6" fill="#e0e7ff" stroke="#4338ca"/>
+  <text x="500" y="377" text-anchor="middle" font-size="13" fill="#312e81">Ingress (alb)</text>
+
+  <line x1="500" y1="392" x2="330" y2="424" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="380" y="410" font-size="11" fill="#6b7280">/</text>
+  <line x1="500" y1="392" x2="670" y2="424" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="600" y="410" font-size="11" fill="#6b7280">/api</text>
+
+  <!-- Frontend Service -->
+  <rect x="200" y="426" width="200" height="38" rx="6" fill="#dbeafe" stroke="#1d4ed8"/>
+  <text x="300" y="450" text-anchor="middle" font-size="13" fill="#1e3a8a">frontend-service (ClusterIP)</text>
+
+  <!-- Backend Service -->
+  <rect x="600" y="426" width="200" height="38" rx="6" fill="#dbeafe" stroke="#1d4ed8"/>
+  <text x="700" y="450" text-anchor="middle" font-size="13" fill="#1e3a8a">backend-service (ClusterIP)</text>
+
+  <line x1="300" y1="464" x2="300" y2="494" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="700" y1="464" x2="700" y2="494" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Frontend pods -->
+  <rect x="190" y="496" width="105" height="60" rx="6" fill="#bfdbfe" stroke="#1d4ed8"/>
+  <text x="242" y="520" text-anchor="middle" font-size="12" fill="#1e3a8a">Frontend</text>
+  <text x="242" y="536" text-anchor="middle" font-size="11" fill="#1e3a8a">Pod (nginx)</text>
+
+  <rect x="305" y="496" width="105" height="60" rx="6" fill="#bfdbfe" stroke="#1d4ed8"/>
+  <text x="357" y="520" text-anchor="middle" font-size="12" fill="#1e3a8a">Frontend</text>
+  <text x="357" y="536" text-anchor="middle" font-size="11" fill="#1e3a8a">Pod (nginx)</text>
+
+  <text x="300" y="572" text-anchor="middle" font-size="10.5" fill="#6b7280">HPA: 2–5 replicas · PDB: minAvailable 1</text>
+
+  <!-- Backend pods -->
+  <rect x="648" y="496" width="105" height="60" rx="6" fill="#bfdbfe" stroke="#1d4ed8"/>
+  <text x="700" y="520" text-anchor="middle" font-size="12" fill="#1e3a8a">Backend</text>
+  <text x="700" y="536" text-anchor="middle" font-size="11" fill="#1e3a8a">Pod (Spring Boot)</text>
+
+  <text x="700" y="572" text-anchor="middle" font-size="10.5" fill="#6b7280">HPA: 2–5 replicas · PDB: minAvailable 1</text>
+
+  <!-- NetworkPolicy note between frontend and backend -->
+  <line x1="410" y1="515" x2="648" y2="515" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="529" y="508" text-anchor="middle" font-size="10" fill="#9ca3af">NetworkPolicy: only frontend → backend:8080</text>
+
+  <!-- arrow backend -> mysql -->
+  <line x1="700" y1="586" x2="700" y2="614" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="720" y="604" font-size="10" fill="#9ca3af">NetworkPolicy: only backend → mysql:3306</text>
+
+  <!-- MySQL service -->
+  <rect x="600" y="616" width="200" height="36" rx="6" fill="#fef3c7" stroke="#b45309"/>
+  <text x="700" y="639" text-anchor="middle" font-size="13" fill="#78350f">mysql (headless Service)</text>
+
+  <line x1="700" y1="652" x2="700" y2="680" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- MySQL StatefulSet -->
+  <rect x="615" y="682" width="170" height="40" rx="6" fill="#fde68a" stroke="#b45309"/>
+  <text x="700" y="706" text-anchor="middle" font-size="12" fill="#78350f">mysql-0 (StatefulSet)</text>
+
+  <line x1="700" y1="722" x2="700" y2="748" stroke="#4b5563" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- PVC / EBS -->
+  <text x="700" y="764" text-anchor="middle" font-size="12" fill="#374151">PVC (20Gi) → AWS EBS volume</text>
+
+  <!-- Legend -->
+  <rect x="120" y="786" width="14" height="14" fill="#bfdbfe" stroke="#1d4ed8"/>
+  <text x="142" y="798" font-size="11" fill="#374151">Compute (Pods)</text>
+  <rect x="260" y="786" width="14" height="14" fill="#dbeafe" stroke="#1d4ed8"/>
+  <text x="282" y="798" font-size="11" fill="#374151">Service (ClusterIP)</text>
+  <rect x="420" y="786" width="14" height="14" fill="#fde68a" stroke="#b45309"/>
+  <text x="442" y="798" font-size="11" fill="#374151">Stateful storage</text>
+  <rect x="570" y="786" width="14" height="14" fill="none" stroke="#9ca3af" stroke-dasharray="3,3"/>
+  <text x="592" y="798" font-size="11" fill="#374151">Planned / future</text>
+</svg>
